@@ -15,5 +15,8 @@
 ">
     <context:property-placeholder location="classpath:config/*.properties" />
 
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="url" value="" />
+    </bean>
 
 </beans>
