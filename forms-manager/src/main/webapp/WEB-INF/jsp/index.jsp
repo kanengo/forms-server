@@ -1,5 +1,5 @@
 <html>
     <body>
-        <h2>forms manager</h2>
+        <h2>index jsp</h2>
     </body>
 </html>
