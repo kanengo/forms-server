@@ -18,6 +18,11 @@
             <artifactId>forms-mapper</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>pers.forms</groupId>
+            <artifactId>forms-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 

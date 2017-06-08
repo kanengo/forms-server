@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="user-scalable=no">
+
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+	<title>社区登陆</title>
+
+
+</head>
+<body style="background-image: url(img/bg.jpg);">
+	<div class="container">
+		<div class="container sigin-div center-block">
+			<div class="title center-block">
+				<h1 style="font-weight: bold;">1024社区欢迎你</h1>
+			</div>
+			<form action="login" class="form-signin" method="post">
+				<div class="form-group">
+					<label for="inputEmail" class="sr-only">Email Address</label>
+					<input id = "inputEmail" class="form-control form-input" type="text" name="email" placeholder="邮箱地址" required autofocus>
+					<label for="inputPassword" class="sr-only">Password</label>
+					<input id="inputPassword" class="form-control form-input" type="password" name="password" placeholder="密码" required>
+				</div>
+				<div class="checkbox form-group">
+					<label>
+						<input type="checkbox" name="remeber">记住密码
+					</label>
+				</div>
+				<button class="btn btn-primary btn-block" type="submit">登陆</button>
+			</form>
+		</div>
+	</div>
+
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+</body>
+</html>

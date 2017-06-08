@@ -11,6 +11,6 @@ public class PageContoller {
 
     @RequestMapping("/")
     public String indexPage(){
-        return "index";
+        return "forward:/index.html";
     }
 }
