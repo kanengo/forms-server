@@ -1,6 +1,7 @@
 package pers.forms.utils;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
@@ -17,21 +18,33 @@ import java.util.Date;
  * Created by Administrator on 2017/6/8.
  */
 public class JWTUtil {
-    private static final String key = "ljn~!@#$%^&*leon./042+";
 
-    private static final String issue = "forms-server";
+    public static String encode(String key){
+        return encode(key, null, null, 0);
+    }
 
-    public static String encode(Object obj, long maxAge) {
+    public static String encode(String key, Object obj, long maxAge){
+        return encode(key, null, obj, maxAge);
+    }
+
+    public static String encode(String key, String issue,  Object obj, long maxAge) {
         try {
             Algorithm algorithm = Algorithm.HMAC256(key);
-            ObjectMapper mapper = new ObjectMapper();
-            String sub = mapper.writeValueAsString(obj);
-            long expireAt = System.currentTimeMillis() + maxAge;
-            String token = JWT.create()
-                    .withIssuer(issue)
-                    .withSubject(sub)
-                    .withExpiresAt(new Date(expireAt))
-                    .sign(algorithm);
+
+            JWTCreator.Builder builder = JWT.create();
+            if (issue != null)
+                builder.withIssuer(issue);
+            if (obj != null){
+                ObjectMapper mapper = new ObjectMapper();
+                String sub = mapper.writeValueAsString(obj);
+                builder.withSubject(sub);
+            }
+            if (maxAge >= 0){
+                long expireAt = System.currentTimeMillis() + maxAge;
+                builder.withExpiresAt(new Date(expireAt));
+            }
+
+            String token = builder.sign(algorithm);
             return token;
         }catch (UnsupportedEncodingException |JsonProcessingException e){
             e.printStackTrace();
@@ -39,7 +52,11 @@ public class JWTUtil {
         return null;
     }
 
-    public static VerifyResult verify(String token){
+    public static  VerifyResult verify(String key, String token){
+        return verify(key, null, token);
+    }
+
+    public static VerifyResult verify(String key, String issue, String token){
         VerifyResult result = new VerifyResult(false, null);
         try {
             Algorithm algorithm = Algorithm.HMAC256(key);
